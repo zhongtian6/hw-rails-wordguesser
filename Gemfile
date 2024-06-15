@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.6.6'
+ruby '3.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11'
+gem 'rails', '7.1.3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -20,4 +20,3 @@ group :test do
   gem 'rspec-rails'
   gem 'webmock'
 end
-
