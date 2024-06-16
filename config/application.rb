@@ -1,6 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
-require "rails"
+require "rails/all"
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -10,7 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
-
+require "/Users/zhongtian/Desktop_Local/ComputerScience/UCB/UCB_CS169_SWE/Software-Engineering/hw-rails-wordguesser/app/models/word_guesser_game.rb"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -28,5 +28,7 @@ module WordGuesserRails
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.active_record.yaml_column_permitted_classes ||= []
+    config.active_record.yaml_column_permitted_classes += [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, WordGuesserGame]
   end
 end

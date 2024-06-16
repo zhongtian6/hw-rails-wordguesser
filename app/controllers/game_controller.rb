@@ -2,7 +2,7 @@ class GameController < ApplicationController
 
   before_action :get_game_from_session
   after_action  :store_game_in_session
-  
+
   def new
   end
 
@@ -22,7 +22,7 @@ class GameController < ApplicationController
     letter = params[:guess]
     begin
       if ! @game.guess(letter[0])
-        flash[:message] = "You have already used that letter." 
+        flash[:message] = "You have already used that letter."
       end
     rescue ArgumentError
       flash[:message] = "Invalid guess."
@@ -33,17 +33,18 @@ class GameController < ApplicationController
   def win
     redirect_to game_path unless @game.check_win_or_lose == :win
   end
-  
+
   def lose
     redirect_to game_path unless @game.check_win_or_lose == :lose
   end
 
   private
-  
+
   def get_game_from_session
     @game = WordGuesserGame.new('')
     if !session[:game].blank?
-      @game = YAML.load(session[:game])
+      permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, WordGuesserGame]
+      @game = YAML.safe_load(session[:game], permitted_classes: permitted_classes, aliases: true)
     end
   end
 
